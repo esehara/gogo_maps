@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe GogoMaps do
   it 'has a version number' do
@@ -42,6 +43,14 @@ describe GogoMaps do
         ).to eq(
           '902 Rockefeller Drive, Sunnyvale, CA 94087, USA'
         )
+      end
+    end
+
+    context '#random' do
+      it 'should return proper parameters' do
+        expect(
+          GogoMaps.random
+        ).not_to be_nil
       end
     end
 

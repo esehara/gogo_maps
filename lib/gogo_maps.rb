@@ -3,14 +3,24 @@ require 'faraday'
 require 'json'
 
 module GogoMaps
-   # @param Hash opts - to support below Ruby1.9x.
-  def self.get(opts={})
-    fail 'Should provide either address or latlng' unless opts[:address] || opts[:latlng]
+  class << self
+     # @param Hash opts - to support below Ruby1.9x.
+    def get(opts={})
+      fail 'Should provide either address or latlng' unless opts[:address] || opts[:latlng]
 
-    GoogleMapClient.call(
-      { language: :ja, sensor: false }.merge(opts),
-      opts[:address] ? :to_latlng : :to_address
-    )
+      GoogleMapClient.call(
+        { language: :ja, sensor: false }.merge(opts),
+        opts[:address] ? :to_latlng : :to_address
+      )
+    end
+
+    def random
+      lat = ((-160..160).to_a.sample + rand).round(8)
+      lng = ((-160..160).to_a.sample + rand).round(8)
+      get(latlng:[lat, lng].join(','))
+    rescue
+      random #FIXIT:
+    end
   end
 
   class GoogleMapClient
