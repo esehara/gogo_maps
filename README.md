@@ -32,4 +32,5 @@ GogoMaps.get(latlng: '37.358126,-122.050636', language: :en)
 ```
 
 ## Contributing
-Please feel free to
+Please feel free to.
+Make you commiter if you wanna be.
