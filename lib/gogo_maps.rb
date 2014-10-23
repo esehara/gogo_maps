@@ -14,10 +14,10 @@ module GogoMaps
       )
     end
 
-    def random
+    def random(opts={})
       lat = ((-160..160).to_a.sample + rand).round(8)
       lng = ((-160..160).to_a.sample + rand).round(8)
-      get(latlng:[lat, lng].join(','))
+      get({latlng:[lat, lng].join(',')}.merge(opts))
     rescue
       random #FIXIT:
     end
