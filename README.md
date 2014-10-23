@@ -1,31 +1,33 @@
 # GogoMaps
 
-TODO: Write a gem description
+Super simple geocode interface for Ruby.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'gogo_maps'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install gem as you like. 
 
     $ gem install gogo_maps
 
-## Usage
+or
 
-TODO: Write usage instructions here
+    $ echo "gem 'gogo_maps'" >> Gemfile
+
+## Demo
+```ruby
+require 'gogo_maps'
+
+# Address to lat and lng.
+GogoMaps.get(address: '長野県上高井郡高山村')
+# => {"lat"=>36.6797676, "lng"=>138.3632554}
+
+GogoMaps.get(address: '神奈川県横浜市港北区日吉')
+# => {"lat"=>35.5565107, "lng"=>139.6460026}
+
+# Lat and lng to Address.
+GogoMaps.get(latlng: '35.6506135,139.7539103')
+# => '日本, 東京都港区芝１丁目１１−１４'
+
+```
 
 ## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/gogo_maps/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+Please feel free to
