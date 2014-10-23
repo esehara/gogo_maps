@@ -17,7 +17,6 @@ module GogoMaps
     ENDPOINT = 'http://maps.googleapis.com'
     @@_conn ||= Faraday.new(url: ENDPOINT) do |faraday|
       faraday.request  :url_encoded
-      faraday.response :logger
       faraday.adapter  Faraday.default_adapter
     end
 
