@@ -1,6 +1,6 @@
 # GogoMaps
 
-Super simple geocode interface for Ruby.
+Super simple geocode interface for Ruby, by using awesome GoogleMaps API
 
 ## Installation
 
