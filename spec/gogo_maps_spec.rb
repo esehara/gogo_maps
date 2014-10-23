@@ -37,6 +37,11 @@ describe GogoMaps do
         ).to eq(
           '日本, 東京都港区芝１丁目１１−１４'
         )
+        expect(
+          GogoMaps.get(latlng: '37.358126,-122.050636', language: :en)
+        ).to eq(
+          '902 Rockefeller Drive, Sunnyvale, CA 94087, USA'
+        )
       end
     end
 
