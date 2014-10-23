@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = GogoMaps::VERSION
   spec.authors       = ["gogotanaka"]
   spec.email         = ["mail@tanakakazuki.com"]
-  spec.summary       = %q{Super simple google maps API interface for Ruby.}
-  spec.description   = %q{Super simple google maps API interface for Ruby.}
+  spec.summary       = %q{Super simple geocode interface for Ruby.}
+  spec.description   = %q{Super simple geocode interface for Ruby.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
