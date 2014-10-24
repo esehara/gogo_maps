@@ -41,8 +41,12 @@ module GogoMaps
       end
 
       case sym
-        when :to_latlng  then location['geometry']['location']
-        when :to_address then location['formatted_address']
+        when :to_latlng
+          location['geometry']['location'].each_with_object({}) do | (k, v), rslt |
+            rslt[k.to_s.to_sym] = v
+          end
+        when :to_address
+          location['formatted_address']
       end
     end
   end
