@@ -1,3 +1,4 @@
 module GogoMaps
-  VERSION = "0.0.5"
+  # Napier's constant
+  VERSION = "0.2.70000000"
 end
