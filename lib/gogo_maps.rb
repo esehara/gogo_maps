@@ -3,6 +3,8 @@ require 'faraday'
 require 'json'
 
 module GogoMaps
+  class InvalidRandomMapError < StandardError; end
+  
   class << self
     def get_latlng(address, opts={})
       GoogleMapClient.call(
@@ -23,6 +25,24 @@ module GogoMaps
       get_address(lat, lng, opts)
     rescue
       random #FIXIT:
+    end
+
+    def _random_by(min_lat, max_lat, min_lng, max_lng, opts, times=0)
+      begin
+        lat = ((min_lat..max_lat).to_a.sample + rand).round(8)
+        lng = ((min_lng..max_lng).to_a.sample + rand).round(8)
+        if times > 20
+          get_address(lat, lng, opts)
+        end
+      rescue
+        _random_by(min_lat, max_lng, min_lng, max_lng, opts, times + 1)
+      end
+      raise InvalidRandomMapError, "Invalid Random Map Error." 
+    end
+    private :_random_by
+    
+    def random_by(min_lat=-180, max_lat=180, min_lng=-180, max_lng=180, opts={})
+      _random_by(min_lat, max_lat, min_lng, max_lng, opts)
     end
   end
 

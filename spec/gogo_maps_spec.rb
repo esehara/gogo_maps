@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 require 'pry'
 
@@ -45,6 +46,24 @@ describe GogoMaps do
     it 'should return proper parameters' do
       expect(
         GogoMaps.random
+      ).not_to be_nil
+    end
+  end
+
+  describe '#random_by' do
+    it 'should return error when set invalid parameter' do
+      gogomap_invalid = false
+      begin
+        GogoMaps.random_by(100, 120, 100, 120)
+      rescue GogoMaps::InvalidRandomMapError
+        gogomap_invalid = true
+      end
+      expect(gogomap_invalid).to be_true
+    end
+
+    it 'should return proper prameters' do
+      expect(
+        GogoMaps.random_by(30, 35, 130, 140)
       ).not_to be_nil
     end
   end
