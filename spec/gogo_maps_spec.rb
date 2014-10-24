@@ -29,12 +29,12 @@ describe GogoMaps do
   describe 'get_address' do
     it 'should return proper parameters' do
       expect(
-        GogoMaps.get_address('35.6506135,139.7539103')
+        GogoMaps.get_address(35.6506135, 139.7539103)
       ).to eq(
         '日本, 東京都港区芝１丁目１１−１４'
       )
       expect(
-        GogoMaps.get_address('37.358126,-122.050636', language: :en)
+        GogoMaps.get_address(37.358126, -122.050636, language: :en)
       ).to eq(
         '902 Rockefeller Drive, Sunnyvale, CA 94087, USA'
       )

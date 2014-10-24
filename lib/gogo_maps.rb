@@ -4,7 +4,6 @@ require 'json'
 
 module GogoMaps
   class << self
-     # @param Hash opts - to support below Ruby1.9x.
     def get_latlng(address, opts={})
       GoogleMapClient.call(
         { address: address, language: :ja, sensor: false }.merge(opts),
@@ -12,18 +11,16 @@ module GogoMaps
       )
     end
 
-    # @param Hash opts - to support below Ruby1.9x.
-    def get_address(latlng, opts={})
+    def get_address(lat, lng, opts={})
       GoogleMapClient.call(
-        { latlng: latlng, language: :ja, sensor: false }.merge(opts),
+        { latlng: "#{lat},#{lng}", language: :ja, sensor: false }.merge(opts),
         :to_address
       )
     end
 
     def random(opts={})
-      lat = ((-180..180).to_a.sample + rand).round(8)
-      lng = ((-180..180).to_a.sample + rand).round(8)
-      get_address([lat, lng].join(','), opts)
+      lat,lng  = (0..1).map{ ((-180..180).to_a.sample + rand).round(8) }
+      get_address(lat, lng, opts)
     rescue
       random #FIXIT:
     end
