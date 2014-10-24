@@ -18,11 +18,15 @@ module GogoMaps
       )
     end
 
-    def random(opts={})
+    def random(opts={}, limit=20)
       lat,lng  = (0..1).map{ ((-180..180).to_a.sample + rand).round(8) }
       get_address(lat, lng, opts)
-    rescue
-      random #FIXIT:
+    rescue => e
+      if limit < 1
+        raise e
+      else
+        random(opts, limit - 1)
+      end
     end
   end
 
