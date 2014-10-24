@@ -4,7 +4,7 @@ Super simple geocode interface for Ruby, by using awesome GoogleMaps API
 
 ## Installation
 
-Install gem as you like. 
+Install gem as you like.
 
     $ gem install gogo_maps
 
@@ -18,10 +18,10 @@ require 'gogo_maps'
 
 # Address to lat and lng.
 GogoMaps.get(address: '長野県上高井郡高山村')
-# => {"lat"=>36.6797676, "lng"=>138.3632554}
+# => { lat: 36.6797676, lng: 138.3632554}
 
 GogoMaps.get(address: '神奈川県横浜市港北区日吉')
-# => {"lat"=>35.5565107, "lng"=>139.6460026}
+# => { lat: 35.5565107, lng: 139.6460026 }
 
 # Lat and lng to Address.
 GogoMaps.get(latlng: '35.6506135,139.7539103')
