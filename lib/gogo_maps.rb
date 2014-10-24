@@ -38,9 +38,16 @@ module GogoMaps
         req.url '/maps/api/geocode/json'
         req.params = params
       end
+      json_response = JSON.parse(response.body)
 
-      unless location = JSON.parse(response.body)['results'][0]
-        fail 'Something wrong with Google API or your params'
+      unless location = json_response['results'][0]
+        error_message =
+          if json_response['status'] && json_response['error_message']
+            "Google API returns error message:: #{json_response['status']}: #{json_response['error_message']}"
+          else
+            'Something wrong with Google API or your params'              
+          end
+        fail error_message
       end
 
       case sym
