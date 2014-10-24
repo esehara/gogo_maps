@@ -20,11 +20,15 @@ module GogoMaps
       )
     end
 
-    def random(opts={})
+    def random(opts={}, limit=20)
       lat,lng  = (0..1).map{ ((-180..180).to_a.sample + rand).round(8) }
       get_address(lat, lng, opts)
-    rescue
-      random #FIXIT:
+    rescue => e
+      if limit < 1
+        raise e
+      else
+        random(opts, limit - 1)
+      end
     end
 
     def _random_by(min_lat, max_lat, min_lng, max_lng, opts, times=0)
@@ -58,9 +62,16 @@ module GogoMaps
         req.url '/maps/api/geocode/json'
         req.params = params
       end
+      json_response = JSON.parse(response.body)
 
-      unless location = JSON.parse(response.body)['results'][0]
-        fail 'Something wrong with Google API or your params'
+      unless location = json_response['results'][0]
+        error_message =
+          if json_response['status'] && json_response['error_message']
+            "Google API returns error message:: #{json_response['status']}: #{json_response['error_message']}"
+          else
+            'Something wrong with Google API or your params'              
+          end
+        fail error_message
       end
 
       case sym
