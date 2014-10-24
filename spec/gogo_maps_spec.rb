@@ -6,53 +6,47 @@ describe GogoMaps do
     expect(GogoMaps::VERSION).not_to be nil
   end
 
-  describe '.get' do
-    it 'should raise error' do
-      expect { GogoMaps.get }.to raise_error(RuntimeError)
+  describe '#get_latlng' do
+    it 'should return proper parameters' do
+      expect(
+        GogoMaps.get_latlng('長野県上高井郡高山村')
+      ).to eq(
+        { lat: 36.6797676, lng: 138.3632554 }
+      )
+      expect(
+        GogoMaps.get_latlng('神奈川県横浜市港北区日吉')
+      ).to eq(
+        { lat: 35.5565107, lng: 139.6460026 }
+      )
+      expect(
+        GogoMaps.get_latlng('902 Rockefeller Dr, Sunnyvale, CA', language: :en)
+      ).to eq(
+        { lat: 37.358126, lng: -122.050636 }
+      )
     end
-
-    context 'to_latlng' do
-      it 'should return proper parameters' do
-        expect(
-          GogoMaps.get(address: '長野県上高井郡高山村')
-        ).to eq(
-          { lat: 36.6797676, lng: 138.3632554 }
-        )
-        expect(
-          GogoMaps.get(address: '神奈川県横浜市港北区日吉')
-        ).to eq(
-          { lat: 35.5565107, lng: 139.6460026 }
-        )
-        expect(
-          GogoMaps.get(address: '902 Rockefeller Dr, Sunnyvale, CA', language: :en)
-        ).to eq(
-          { lat: 37.358126, lng: -122.050636 }
-        )
-      end
-    end
-
-    context 'to_address' do
-      it 'should return proper parameters' do
-        expect(
-          GogoMaps.get(latlng: '35.6506135,139.7539103')
-        ).to eq(
-          '日本, 東京都港区芝１丁目１１−１４'
-        )
-        expect(
-          GogoMaps.get(latlng: '37.358126,-122.050636', language: :en)
-        ).to eq(
-          '902 Rockefeller Drive, Sunnyvale, CA 94087, USA'
-        )
-      end
-    end
-
-    context '#random' do
-      it 'should return proper parameters' do
-        expect(
-          GogoMaps.random
-        ).not_to be_nil
-      end
-    end
-
   end
+
+  describe 'get_address' do
+    it 'should return proper parameters' do
+      expect(
+        GogoMaps.get_address('35.6506135,139.7539103')
+      ).to eq(
+        '日本, 東京都港区芝１丁目１１−１４'
+      )
+      expect(
+        GogoMaps.get_address('37.358126,-122.050636', language: :en)
+      ).to eq(
+        '902 Rockefeller Drive, Sunnyvale, CA 94087, USA'
+      )
+    end
+  end
+
+  describe '#random' do
+    it 'should return proper parameters' do
+      expect(
+        GogoMaps.random
+      ).not_to be_nil
+    end
+  end
+
 end
